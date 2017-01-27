@@ -1,0 +1,10 @@
+.navline {
+  margin-left: 10%;
+  width:80%;
+  height:1px;
+  background-color: grey;
+};
+
+.col-md-8 {
+  padding-left: 10%;
+};

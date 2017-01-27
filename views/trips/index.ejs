@@ -1,0 +1,30 @@
+
+<% if (currentUser && currentUser.isAdmin) { %>
+  Administrator mode
+  <a href="/trips/create">Create new trips</a>
+  <% } %>
+  <ul>
+    <div class="row">
+      <% trips.forEach(function(country) { %>
+        <div class="col-md-6">
+          <li><%= country.country %></li>
+          <li>Package No. <%= country.packageNumber %></li>
+          <% if (currentUser && typeof currentUser.tripsBooked.find(function(element){
+            return element.id == country.id
+          }) != "undefined"){ %>
+            <form action="/trips/<%= country._id%>/leave" method="POST">
+              <input type="submit" value="Leave"></form>
+              <% } else { %>
+                <form action="/trips/<%= country._id%>/join" method="POST">
+                  <input type="submit" value="Join"></form>
+                  <% } %>
+                  <% if (currentUser && currentUser.isAdmin) { %>
+                    Administrator mode
+                    <a href="/trips/<%= country._id%>/edit">Edit trips</a>
+                    <form action="/trips/<%= country._id%>/delete" method="POST">
+                      <input type="submit" value="Delete"></form>
+                      <% } %>
+                    </div><br>
+                    <% }); %>
+                  </div>
+                </ul>
